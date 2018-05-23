@@ -1,4 +1,4 @@
-// FindCard.cpp : ÄÜ¼Ö ÀÀ¿ë ÇÁ·Î±×·¥¿¡ ´ëÇÑ ÁøÀÔÁ¡À» Á¤ÀÇÇÕ´Ï´Ù.
+// FindCard.cpp : ì½˜ì†” ì‘ìš© í”„ë¡œê·¸ë¨ì— ëŒ€í•œ ì§„ì…ì ì„ ì •ì˜í•©ë‹ˆë‹¤.
 //
 
 #include "stdafx.h"
@@ -7,12 +7,12 @@
 #include <Windows.h>
 #include <time.h>
 #include <conio.h>
-void gotoxy(int x, int y); //ÁÂÇ¥·Î ÀÌµ¿
-void initMap(char(*Map)[7]); //¸Ê ? Ç¥·Î ÃÊ±âÈ­
-void initBehind(char(*Map)[7], char alpha[49]); //¾ËÆÄºªÀÌ µé¾îÀÖ´Â ¸Ê
-void printMap(char(*Map)[7]); //¸Ê Ãâ·Â
-void initAlpha(char alpha[49]); //¾ËÆÄºª ÃÊ±âÈ­
-void makeMap(char *front, char *behind); //¸Ê º¯È­
+void gotoxy(int x, int y); //ì¢Œí‘œë¡œ ì´ë™
+void initMap(char(*Map)[7]); //ë§µ ? í‘œë¡œ ì´ˆê¸°í™”
+void initBehind(char(*Map)[7], char alpha[49]); //ì•ŒíŒŒë²³ì´ ë“¤ì–´ìˆëŠ” ë§µ
+void printMap(char(*Map)[7]); //ë§µ ì¶œë ¥
+void initAlpha(char alpha[49]); //ì•ŒíŒŒë²³ ì´ˆê¸°í™”
+void makeMap(char *front, char *behind); //ë§µ ë³€í™”
 int main()
 {
 	int i = 0;
@@ -21,21 +21,21 @@ int main()
 	int entercount = 1;
 	int key = 0;
 	char alpha[49];
-	char MapBehind[7][7]; // Á¤´äÀ» °¡Áø ¸Ê
-	char Mapfront[7][7]; // ? ¸¦ °¡Áü
-	int x = 0, y = 0; // ÁÂÇ¥
+	char MapBehind[7][7]; // ì •ë‹µì„ ê°€ì§„ ë§µ
+	char Mapfront[7][7]; // ? ë¥¼ ê°€ì§
+	int x = 0, y = 0; // ì¢Œí‘œ
 	int x1, y1;
-	int score = 1000; //Á¡¼ö
+	int score = 1000; //ì ìˆ˜
 	initMap(Mapfront);
 	initAlpha(alpha);
 	initBehind(MapBehind, alpha);
 	printMap(Mapfront);
 	gotoxy(15, 2);
-	printf("Á¡¼ö = %4d", score);
+	printf("ì ìˆ˜ = %4d", score);
 	gotoxy(15, 3);
-	printf("Á¤´ä = %c %c %c", alpha[0], alpha[1], alpha[2]);
+	printf("ì •ë‹µ = %c %c %c", alpha[0], alpha[1], alpha[2]);
 	gotoxy(0, 10);
-	printf("Á¤´äÀ» ÀÔ·ÂÇÏ·Á¸é ? Å°¸¦ ´©¸£¼¼¿ä");
+	printf("ì •ë‹µì„ ì…ë ¥í•˜ë ¤ë©´ ? í‚¤ë¥¼ ëˆ„ë¥´ì„¸ìš”");
 	gotoxy(x, y);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
 	gotoxy(x, y);
@@ -45,7 +45,7 @@ int main()
 			if (key == 224 || key == 0) {
 				key = _getch();
 				switch (key) {
-				case 72: //»ó
+				case 72: //ìƒ
 					if (y > 0) {
 						gotoxy(x, y);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -58,7 +58,7 @@ int main()
 						printf("?");
 					}
 					break;
-				case 75: //ÁÂ
+				case 75: //ì¢Œ
 					if (x > 0) {
 						gotoxy(x, y);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -71,7 +71,7 @@ int main()
 						printf("?");
 					}
 					break;
-				case 77: //¿ì
+				case 77: //ìš°
 					if (x < 6) {
 						gotoxy(x, y);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -84,7 +84,7 @@ int main()
 						printf("?");
 					}
 					break;
-				case 80: //ÇÏ
+				case 80: //í•˜
 					if (y < 6) { 
 						gotoxy(x, y);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -102,7 +102,7 @@ int main()
 			else if (key == 63) {
 				gotoxy(0, 11);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-				printf("Á¤´äÀº ? (¿¬¼ÓÀ¸·Î ¼¼±ÛÀÚ ÀÔ·Â) :  ");
+				printf("ì •ë‹µì€ ? (ì—°ì†ìœ¼ë¡œ ì„¸ê¸€ì ì…ë ¥) :  ");
 				scanf_s(" %c", &answer[1]);
 				scanf_s(" %c", &answer[2]);
 				scanf_s(" %c", &answer[3]);
@@ -110,42 +110,42 @@ int main()
 					if (answer[2] == alpha[0] || answer[2] == alpha[1] || answer[2] == alpha[2]) {
 						if (answer[3] == alpha[0] || answer[3] == alpha[1] || answer[3] == alpha[2]) {
 							gotoxy(0, 13);
-							printf("Á¤´äÀÔ´Ï´Ù !!!!");
+							printf("ì •ë‹µì…ë‹ˆë‹¤ !!!!");
 							return 0;
 						}
 						else {
 							gotoxy(0, 13);
-							printf("¿À´äÀÔ´Ï´Ù");
+							printf("ì˜¤ë‹µì…ë‹ˆë‹¤");
 							score -= trycount * 10;
 							trycount++;
 							gotoxy(0, 11);
 							printf("                                           ");
 							gotoxy(15, 2);
-							printf("Á¡¼ö = %4d", score);
+							printf("ì ìˆ˜ = %4d", score);
 							gotoxy(x, y);
 						}
 					}
 					else {
 						gotoxy(0, 13);
-						printf("¿À´äÀÔ´Ï´Ù");
+						printf("ì˜¤ë‹µì…ë‹ˆë‹¤");
 						score -= trycount * 10;
 						trycount++;
 						gotoxy(0, 11);
 						printf("                                           ");
 						gotoxy(15, 2);
-						printf("Á¡¼ö = %4d", score);
+						printf("ì ìˆ˜ = %4d", score);
 						gotoxy(x, y);
 					}
 				}
 				else {
 					gotoxy(0, 13);
-					printf("¿À´äÀÔ´Ï´Ù");
+					printf("ì˜¤ë‹µì…ë‹ˆë‹¤");
 					score -= trycount * 10;
 					trycount++;
 					gotoxy(0, 11);
 					printf("                                           ");
 					gotoxy(15, 2);
-					printf("Á¡¼ö = %4d", score);
+					printf("ì ìˆ˜ = %4d", score);
 					gotoxy(x, y);
 				}
 			}
@@ -164,7 +164,7 @@ int main()
 						score -= 5;
 						gotoxy(15, 2);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-						printf("Á¡¼ö = %4d", score);
+						printf("ì ìˆ˜ = %4d", score);
 						if (MapBehind[y][x] == MapBehind[y1][x1]) {
 							Mapfront[y][x] = MapBehind[y][x];
 							gotoxy(0, 0);
@@ -189,7 +189,7 @@ int main()
 			}
 	}
 	gotoxy(0, 13);
-	printf("¤Ğ¤Ğ¤Ğ ½ÇÆĞÇÏ¿´½À´Ï´Ù\n");
+	printf("ã… ã… ã…  ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤\n");
 	return 0;
 }
 void gotoxy(int x, int y) {
@@ -215,7 +215,7 @@ void initBehind(char(*Map)[7], char alpha[49]) {
 		while (1) {
 			answer[i] = rand() % 49;
 			check = 0;
-			for (j = 0; j < i; j++) { //°°Àº°ªÀÌ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù
+			for (j = 0; j < i; j++) { //ê°™ì€ê°’ì´ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤
 				if (answer[j] == answer[i]) {
 					check = 1;
 					break;
@@ -245,10 +245,10 @@ void printMap(char(*Map)[7]) {
 }
 
 void initAlpha(char alpha[49]) { // A = 65, Z = 90
-	//abcde fghij klmno pqrst uvwxy z 26°³
+	//abcde fghij klmno pqrst uvwxy z 26ê°œ
 	int i, j = 0;
 	srand(time(NULL));
-	alpha[0] = rand() % 25 + 65; //Á¤´ä ¸¸µé±â
+	alpha[0] = rand() % 25 + 65; //ì •ë‹µ ë§Œë“¤ê¸°
 	do {
 		alpha[1] = rand() % 25 + 65;
 	} while (alpha[1] == alpha[0]);
@@ -267,6 +267,6 @@ void initAlpha(char alpha[49]) { // A = 65, Z = 90
 		if (alpha[i] == 'Z') j = 0;
 	}
 }
-void makeMap(char *front, char *behind){ //¸Ê º¯È­
+void makeMap(char *front, char *behind){ //ë§µ ë³€í™”
 	*front = *behind;
 }
